@@ -1,0 +1,117 @@
+/* الخطوط الأساسية */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  direction: rtl;
+  background-color: #fdfdfd;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* العنوان الرئيسي */
+header {
+  background-color: #009688;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 2.5em;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* حاوية الأزرار */
+.game-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 30px 10%;
+  gap: 15px;
+}
+
+/* أزرار الألعاب */
+.game-btn {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 14px 24px;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 180px;
+}
+
+.game-btn:hover {
+  background-color: #388E3C;
+}
+
+/* وصف اللعبة */
+.game-description {
+  display: none;
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 30px;
+  border: 2px solid #009688;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  font-size: 18px;
+}
+
+.game-description h3 {
+  color: #00796B;
+  margin-top: 0;
+}
+
+/* مربعات الكلمات والعناصر التفاعلية */
+.word-box, .memory-board, .boxes-board, .treasure-board, .silent-title {
+  background-color: #fff;
+  border: 2px dashed #009688;
+  padding: 15px;
+  margin: 10px 0;
+  min-height: 40px;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* مدخلات النص */
+input[type="number"], input[type="text"] {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px 0;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* الفوتر */
+footer {
+  background-color: #eeeeee;
+  color: #666;
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  margin-top: 30px;
+  border-top: 1px solid #ccc;
+}
+
+/* ⚙️ تحسينات لأجهزة اللابتوب والكمبيوتر */
+@media screen and (min-width: 768px) {
+  .game-container {
+      padding: 30px 15%;
+  }
+
+  .game-description {
+      font-size: 19px;
+  }
+
+  .game-btn {
+      font-size: 20px;
+      padding: 16px 28px;
+  }
+
+  input[type="text"], input[type="number"] {
+      font-size: 18px;
+  }
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ألعاب جماعية</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>ألعاب جماعية</header>
+
+<div class="game-container">
+    <button class="game-btn" onclick="showGame('mobile_head')">الجوال على الرأس</button>
+    <button class="game-btn" onclick="showGame('mafia')">لعبة المافيا</button>
+    <button class="game-btn" onclick="showGame('outside_topic')">خارج الموضوع</button>
+    <button class="game-btn" onclick="showGame('who_is_it')">مين فينا؟</button>
+    <button class="game-btn" onclick="showGame('matching_pictures')">الصور المتشابهة</button>
+    <button class="game-btn" onclick="showGame('boxes')">الصناديق</button>
+    <button class="game-btn" onclick="showGame('fastest')">الأسرع</button>
+    <button class="game-btn" onclick="showGame('balance')">التوازن</button>
+    <button class="game-btn" onclick="showGame('treasure')">الكنز</button>
+    <button class="game-btn" onclick="showGame('silent')">بدون كلام</button>
+    <button class="game-btn" onclick="showGame('wink_murder')">غمزة القاتل</button>
+    <button class="game-btn" onclick="showGame('spy')">الجاسوس</button>
+</div>
+
+<div id="mobile_head" class="game-description">
+    <h3>لعبة الجوال على الرأس</h3>
+    <p>خمن الكلمة التي يصفها أصدقاؤك</p>
+    <div id="word-display" class="word-box">اضغط ابدأ</div>
+    <button onclick="startGame()" class="game-btn">ابدأ</button>
+    <button onclick="nextWord()" class="game-btn">التالي</button>
+    <button onclick="skipWord()" class="game-btn">تخطي</button>
+    <p id="score">النقاط: 0</p>
+</div>
+<div id="mafia" class="game-description">
+    <h3>لعبة المافيا</h3>
+    <p>أدخل عدد اللاعبين ثم وزع الأدوار:</p>
+    <input type="number" id="mafia-players-count" min="5" max="12" placeholder="عدد اللاعبين" />
+    <input type="text" id="player-name" placeholder="اسم اللاعب" />
+    <button class="game-btn" onclick="assignRoles()">توزيع الأدوار</button>
+    <div id="roles-output" class="word-box"></div>
+    <button class="game-btn" onclick="nextPlayer()">التالي</button>
+</div>
+<div id="outside_topic" class="game-description">
+    <h3>لعبة خارج الموضوع</h3>
+    <p>أدخل عدد اللاعبين والكلمة السرية:</p>
+    <input type="number" id="outside-player-count" min="3" max="12" placeholder="عدد اللاعبين" />
+    <input type="text" id="player-name" placeholder="اسم اللاعب" />
+    <input type="text" id="secret-word" placeholder="الكلمة السرية" />
+    <button class="game-btn" onclick="startOutsideTopic()">ابدأ التوزيع</button>
+    <div id="outside-output" class="word-box"></div>
+    <button class="game-btn" onclick="nextOutsidePlayer()">التالي</button>
+</div>
+<div id="who_is_it" class="game-description">
+    <h3>لعبة مين فينا؟</h3>
+    <p>اكتب سؤالًا (مثل: من أكثر شخص يضحك؟):</p>
+    <input type="text" id="who-question" placeholder="أدخل السؤال هنا" />
+    <input type="text" id="player-name" placeholder="اسم اللاعب" />
+    <button class="game-btn" onclick="submitWhoQuestion()">اعرض السؤال</button>
+    <div id="who-question-display" class="word-box"></div>
+    <p>بعد عرض السؤال، يصوت اللاعبون سرًّا على من تنطبق عليه الصفة.</p>
+</div>
+<div id="matching_pictures" class="game-description">
+    <h3>لعبة الصور المتشابهة</h3>
+    <p>انقر على بطاقتين لمطابقة الصور المتشابهة.</p>
+    <input type="text" id="player-name" placeholder="اسم اللاعب" />
+    <button class="game-btn" onclick="startMatchingGame()">ابدأ اللعبة</button>
+    <div id="game-board" class="memory-board"></div>
+    <p id="matching-score">المحاولات: 0</p>
+</div>
+<div id="boxes" class="game-description">
+    <h3>لعبة الصناديق</h3>
+    <p>انقر على الأرقام من 1 إلى 20 بالترتيب الصحيح.</p>
+    <input type="text" id="player-name" placeholder="اسم اللاعب" />
+    <button class="game-btn" onclick="startBoxesGame()">ابدأ اللعبة</button>
+    <div id="boxes-board" class="boxes-board"></div>
+    <p id="boxes-status">ابدأ اللعبة!</p>
+</div>
+<div id="fastest" class="game-description">
+    <h3>لعبة الأسرع</h3>
+    <p>اضغط على الزر بأسرع وقت ممكن.</p>
+    <input type="text" id="player-name" placeholder="اسم اللاعب" />
+    <button class="game-btn" onclick="startFastestGame()">ابدأ اللعبة</button>
+    <div id="fastest-status">انتظر بدء اللعبة...</div>
+    <button id="fastest-btn" style="display: none;" onclick="finishFastestGame()">اضغط هنا!</button>
+    <p id="fastest-time"></p>
+</div>
+<div id="balance" class="game-description">
+    <h3>لعبة التوازن</h3>
+    <p>حاول الثبات على الحركة المطلوبة لأطول فترة ممكنة.</p>
+    <input type="text" id="player-name" placeholder="اسم اللاعب" />
+    <button class="game-btn" onclick="startBalanceGame()">ابدأ اللعبة</button>
+    <div id="balance-status">انتظر بدء اللعبة...</div>
+    <div id="balance-instructions"></div>
+    <button id="balance-btn" style="display: none;" onclick="checkBalance()">ابق ثابتًا!</button>
+    <p id="balance-time"></p>
+</div>
+<div id="treasure" class="game-description">
+    <h3>لعبة الكنز</h3>
+    <p>ابحث عن الكنز المخفي في هذه الصفحة!</p>
+    <input type="text" id="player-name" placeholder="اسم اللاعب" />
+    <button class="game-btn" onclick="startTreasureGame()">ابدأ اللعبة</button>
+    <div id="treasure-status">انتظر! سيبدأ البحث...</div>
+    <div id="treasure-board" class="treasure-board"></div>
+    <p id="treasure-result"></p>
+</div>
+<div id="silent" class="game-description">
+    <h3>لعبة بدون كلام</h3>
+    <p>تمثيل العناوين بشكل صامت من خلال الإيماءات.</p>
+    <input type="text" id="player-name" placeholder="اسم اللاعب" />
+    <button class="game-btn" onclick="startSilentGame()">ابدأ اللعبة</button>
+    <div id="silent-status">انتظر بدء اللعبة...</div>
+    <div id="silent-title" class="silent-title"></div>
+    <input type="text" id="silent-guess" placeholder="اكتب تخمينك هنا..." onkeyup="checkSilentGuess()" />
+    <p id="silent-result"></p>
+</div>
+<div id="wink_murder" class="game-description">
+    <h3>لعبة غمزة القاتل</h3>
+    <p>حاول اكتشاف القاتل الذي يغمز للاعبين لقتلهم!</p>
+    <input type="text" id="player-name" placeholder="اسم اللاعب" />
+    <button class="game-btn" onclick="startWinkMurderGame()">ابدأ اللعبة</button>
+    <div id="wink-murder-status">انتظر بدء اللعبة...</div>
+    <div id="wink-murder-players"></div>
+    <p id="wink-murder-result"></p>
+</div>
+<div id="spy" class="game-description">
+    <h3>لعبة الجاسوس</h3>
+    <p>اكتشف الجاسوس الذي لا يعرف المكان السري.</p>
+    <input type="text" id="player-name" placeholder="اسم اللاعب" />
+    <button class="game-btn" onclick="startSpyGame()">ابدأ اللعبة</button>
+    <div id="spy-status">انتظر بدء اللعبة...</div>
+    <div id="spy-players"></div>
+    <p id="spy-result"></p>
+</div>
+
+
+
+
+<footer>© 2025 جميع الحقوق محفوظة</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
